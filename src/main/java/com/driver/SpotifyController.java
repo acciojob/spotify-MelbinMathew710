@@ -14,13 +14,14 @@ public class SpotifyController {
     @PostMapping("/add-user")
     public String createUser(@RequestParam(name = "name") String name, String mobile){
         //create the user with given name and number
+        spotifyService.createUser(name, mobile) ;
         return "Success";
     }
 
     @PostMapping("/add-artist")
     public String createArtist(@RequestParam(name = "name") String name){
         //create the artist with given name
-
+        spotifyService.createArtist(name) ;
         return "Success";
     }
 
@@ -29,6 +30,11 @@ public class SpotifyController {
         //If the artist does not exist, first create an artist with given name
         //Create an album with given title and artist
 
+        if(!spotifyService.hasArtist(artistName)){
+            spotifyService.createArtist(artistName) ;
+        }
+
+        spotifyService.createAlbum(title, artistName) ;
         return "Success";
     }
 
@@ -36,6 +42,19 @@ public class SpotifyController {
     public String createSong(String title, String albumName, int length) throws Exception{
         //If the album does not exist in database, throw "Album does not exist" exception
         //Create and add the song to respective album
+
+        try{
+            spotifyService.createSong(title, albumName, length) ;
+        }
+        catch(AlbumDoesNotExistException e){
+            throw new AlbumDoesNotExistException()  ;
+        }
+
+//        if(!SpotifyService.isAlbum(albumName)){
+//            throw new AlbumDoesNotExistException() ;
+//        }
+//
+//        spotifyService.createSong(title, albumName,length) ;
 
         return "Success";
     }
@@ -46,6 +65,13 @@ public class SpotifyController {
         //The creater of the playlist will be the given user and will also be the only listener at the time of playlist creation
         //If the user does not exist, throw "User does not exist" exception
 
+        try{
+            spotifyService.createPlaylistOnLength(mobile, title, length) ;
+        }
+        catch(UserDoesNotExistException e){
+            throw new UserDoesNotExistException() ;
+        }
+
         return "Success";
     }
 
@@ -54,6 +80,13 @@ public class SpotifyController {
         //Create a playlist with given title and add all songs having the given titles in the database to that playlist
         //The creater of the playlist will be the given user and will also be the only listener at the time of playlist creation
         //If the user does not exist, throw "User does not exist" exception
+
+        try{
+            spotifyService.createPlaylistOnName(mobile, title, songTitles) ;
+        }
+        catch(UserDoesNotExistException e){
+            throw new UserDoesNotExistException() ;
+        }
 
         return "Success";
     }
@@ -66,30 +99,49 @@ public class SpotifyController {
         //If the playlist does not exists, throw "Playlist does not exist" exception
         // Return the playlist after updating
 
-        return "Success";
-    }
-
-    @PutMapping("/like-song")
-    public String likeSong(String mobile, String songTitle) throws Exception{
-        //The user likes the given song. The corresponding artist of the song gets auto-liked
-        //A song can be liked by a user only once. If a user tried to like a song multiple times, do nothing
-        //However, an artist can indirectly have multiple likes from a user, if the user has liked multiple songs of that artist.
-        //If the user does not exist, throw "User does not exist" exception
-        //If the song does not exist, throw "Song does not exist" exception
-        //Return the song after updating
+        try{
+            spotifyService.findPlaylist(mobile, playlistTitle) ;
+        }
+        catch(UserDoesNotExistException e){
+            throw new UserDoesNotExistException() ;
+        }
+        catch(PlayListDoesNotExistException e){
+            throw new PlayListDoesNotExistException() ;
+        }
 
         return "Success";
     }
-
-    @GetMapping("/popular-artist")
-    public String mostPopularArtist(){
-        //Return the artist name with maximum likes
-
-    }
-
-    @GetMapping("/popular-song")
-    public String mostPopularSong(){
-        //return the song title with maximum likes
-
-    }
+//
+//    @PutMapping("/like-song")
+//    public String likeSong(String mobile, String songTitle) throws Exception{
+//        //The user likes the given song. The corresponding artist of the song gets auto-liked
+//        //A song can be liked by a user only once. If a user tried to like a song multiple times, do nothing
+//        //However, an artist can indirectly have multiple likes from a user, if the user has liked multiple songs of that artist.
+//        //If the user does not exist, throw "User does not exist" exception
+//        //If the song does not exist, throw "Song does not exist" exception
+//        //Return the song after updating
+//
+//        try{
+//            spotifyService.likeSong(mobile, songTitle) ;
+//        }
+//        catch(){
+//
+//        }
+//
+//        return "Success";
+//    }
+//
+//    @GetMapping("/popular-artist")
+//    public String mostPopularArtist(){
+//        //Return the artist name with maximum likes
+//
+//
+//
+//    }
+//
+//    @GetMapping("/popular-song")
+//    public String mostPopularSong(){
+//        //return the song title with maximum likes
+//
+//    }
 }

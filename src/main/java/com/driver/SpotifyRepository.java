@@ -9,15 +9,15 @@ public class SpotifyRepository {
     public HashMap<Artist, List<Album>> artistAlbumMap;
     public HashMap<Album, List<Song>> albumSongMap;
     public HashMap<Playlist, List<Song>> playlistSongMap;
-    public HashMap<Playlist, List<User>> playlistListenerMap;
-    public HashMap<User, Playlist> creatorPlaylistMap;
+    public HashMap<Playlist, List<User>> playlistListenerMap; //
+    public HashMap<User, Playlist> creatorPlaylistMap; //
     public HashMap<User, List<Playlist>> userPlaylistMap;
     public HashMap<Song, List<User>> songLikeMap;
 
     public List<User> users;
     public List<Song> songs;
     public List<Playlist> playlists;
-    public List<Album> albums;
+    public static List<Album> albums;
     public List<Artist> artists;
 
     public SpotifyRepository(){
@@ -37,37 +37,66 @@ public class SpotifyRepository {
         artists = new ArrayList<>();
     }
 
+    public static boolean isAlbum(Album album) {
+        if(albums.contains(album)){
+            return true ;
+        }
+        return false ;
+    }
+
     public User createUser(String name, String mobile) {
+        User user = new User(name, mobile) ;
+        users.add(user) ;
+        return user ;
     }
 
     public Artist createArtist(String name) {
+        Artist artist = new Artist(name) ;
+        artists.add(artist) ;
+        return artist ;
     }
 
-    public Album createAlbum(String title, String artistName) {
+    public Album createAlbum(String title) {
+        Album album = new Album(title) ;
+        albums.add(album) ;
+
+
+        return album ;
     }
 
     public Song createSong(String title, String albumName, int length) throws Exception{
+        Song song = new Song(title, length) ;
+        songs.add(song) ;
+        Album album = new Album(albumName) ;
+        albumSongMap.put(album,songs) ;
+
+        return song ;
     }
 
     public Playlist createPlaylistOnLength(String mobile, String title, int length) throws Exception {
-
+        return null ;
     }
 
-    public Playlist createPlaylistOnName(String mobile, String title, List<String> songTitles) throws Exception {
-
+    public Playlist createPlaylistOnName(String mobile, String title, List<String> songTitles) throws Exception{
+        return null ;
     }
+
 
     public Playlist findPlaylist(String mobile, String playlistTitle) throws Exception {
-
+        return null ;
     }
+//
+//    public Song likeSong(String mobile, String songTitle) throws Exception {
+//        return null ; // not imp properly
+//    }
+//
+//    public String mostPopularArtist() {
+//    }
+//
+//    public String mostPopularSong() {
+//    }
 
-    public Song likeSong(String mobile, String songTitle) throws Exception {
-
-    }
-
-    public String mostPopularArtist() {
-    }
-
-    public String mostPopularSong() {
+    public boolean hasArtist(Artist artist) {
+        return artists.contains(artist) ;
     }
 }
