@@ -85,16 +85,18 @@ public class SpotifyRepository {
     public Playlist findPlaylist(String mobile, String playlistTitle) throws Exception {
         return null ;
     }
-//
-//    public Song likeSong(String mobile, String songTitle) throws Exception {
-//        return null ; // not imp properly
-//    }
-//
-//    public String mostPopularArtist() {
-//    }
-//
-//    public String mostPopularSong() {
-//    }
+
+    public Song likeSong(String mobile, String songTitle) throws Exception {
+        return null ; // not imp properly
+    }
+
+    public String mostPopularArtist() {
+        return null ;
+    }
+
+    public String mostPopularSong() {
+        return null ;
+    }
 
     public boolean hasArtist(Artist artist) {
         return artists.contains(artist) ;

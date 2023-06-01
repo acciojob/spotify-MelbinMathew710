@@ -111,40 +111,43 @@ public class SpotifyController {
 
         return "Success";
     }
-//
-//    @PutMapping("/like-song")
-//    public String likeSong(String mobile, String songTitle) throws Exception{
-//        //The user likes the given song. The corresponding artist of the song gets auto-liked
-//        //A song can be liked by a user only once. If a user tried to like a song multiple times, do nothing
-//        //However, an artist can indirectly have multiple likes from a user, if the user has liked multiple songs of that artist.
-//        //If the user does not exist, throw "User does not exist" exception
-//        //If the song does not exist, throw "Song does not exist" exception
-//        //Return the song after updating
-//
-//        try{
-//            spotifyService.likeSong(mobile, songTitle) ;
-//        }
-//        catch(UserDoesNotExistException e){
-//            throw new UserDoesNotExistException() ;
-//        }
-//        catch(SongDoesNotExistException e){
-//            throw new SongDoesNotExistException() ;
-//        }
-//
-//        return "Success";
-//    }
-//
-//    @GetMapping("/popular-artist")
-//    public String mostPopularArtist(){
-//        //Return the artist name with maximum likes
-//
-//
-//
-//    }
-//
-//    @GetMapping("/popular-song")
-//    public String mostPopularSong(){
-//        //return the song title with maximum likes
-//
-//    }
+
+    @PutMapping("/like-song")
+    public String likeSong(String mobile, String songTitle) throws Exception{
+        //The user likes the given song. The corresponding artist of the song gets auto-liked
+        //A song can be liked by a user only once. If a user tried to like a song multiple times, do nothing
+        //However, an artist can indirectly have multiple likes from a user, if the user has liked multiple songs of that artist.
+        //If the user does not exist, throw "User does not exist" exception
+        //If the song does not exist, throw "Song does not exist" exception
+        //Return the song after updating
+
+        try{
+            spotifyService.likeSong(mobile, songTitle) ;
+        }
+        catch(UserDoesNotExistException e){
+            throw new UserDoesNotExistException() ;
+        }
+        catch(SongDoesNotExistException e){
+            throw new SongDoesNotExistException() ;
+        }
+
+        return "Success";
+    }
+
+    @GetMapping("/popular-artist")
+    public String mostPopularArtist(){
+        //Return the artist name with maximum likes
+
+        String name = spotifyService.mostPopularArtist() ;
+        return name;
+    }
+
+    @GetMapping("/popular-song")
+    public String mostPopularSong(){
+        //return the song title with maximum likes
+
+        String name1 = spotifyService.mostPopularSong() ;
+        return name1;
+
+    }
 }

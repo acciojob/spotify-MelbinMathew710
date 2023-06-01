@@ -140,45 +140,51 @@ public class SpotifyService {
             throw new PlayListDoesNotExistException() ;
         }
 
-
-
         if(!flag1 && !flag2 && !spotifyRepository.creatorPlaylistMap.containsKey(res)){
             spotifyRepository.playlistListenerMap.get(p1).add(res) ;
         }
 
         return p1 ;
     }
-//
-//    public Song likeSong(String mobile, String songTitle) throws Exception {
-//
-//        User u = findUser(mobile) ;
-//        Song s = checkSongs(songTitle) ;
-//
-//        if(!spotifyRepository.songLikeMap.containsKey(s)){
-//            spotifyRepository.songLikeMap.put(s,new ArrayList<>()) ;
-//        }
-//
-//        if(!spotifyRepository.songLikeMap.get(s).contains(u)){
-//            spotifyRepository.songLikeMap.get(s).add(u) ;
-//        }
-//
-//
+
+    public Song likeSong(String mobile, String songTitle) throws Exception {
+
+        User u = findUser(mobile) ;
+        Song s = checkSongs(songTitle) ;
+
+        if(!spotifyRepository.songLikeMap.containsKey(s)){
+            spotifyRepository.songLikeMap.put(s,new ArrayList<>()) ;
+        }
+
+        if(!spotifyRepository.songLikeMap.get(s).contains(u)){
+            spotifyRepository.songLikeMap.get(s).add(u) ;
+        }
+
+
 //        for(User u1 : spotifyRepository.creatorPlaylistMap.keySet() ){
 //            for(Song s1 : spotifyRepository.creatorPlaylistMap.get(u1)){
 //
 //            }
 //        }
-//
-//        return s ;
-//    }
-//
-//    public String mostPopularArtist() {
-//
-//    }
-//
-//    public String mostPopularSong() {
-//
-//    }
+
+        return s ;
+    }
+
+    public String mostPopularArtist() {
+        return "" ;
+    }
+
+    public String mostPopularSong() {
+        int max = 0 ;
+        Song result = null ;
+        for (Song s : spotifyRepository.songLikeMap.keySet()) {
+            if (spotifyRepository.songLikeMap.get(s).size() > max) {
+                max = spotifyRepository.songLikeMap.get(s).size();
+                result = s;
+            }
+        }
+        return "most popuar song is:" + result ;
+    }
 
     public boolean hasArtist(String artistName) {
         Artist artist = new Artist(artistName) ;
