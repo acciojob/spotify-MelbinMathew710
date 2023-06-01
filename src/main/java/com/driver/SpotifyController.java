@@ -124,8 +124,11 @@ public class SpotifyController {
 //        try{
 //            spotifyService.likeSong(mobile, songTitle) ;
 //        }
-//        catch(){
-//
+//        catch(UserDoesNotExistException e){
+//            throw new UserDoesNotExistException() ;
+//        }
+//        catch(SongDoesNotExistException e){
+//            throw new SongDoesNotExistException() ;
 //        }
 //
 //        return "Success";

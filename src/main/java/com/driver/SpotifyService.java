@@ -164,7 +164,7 @@ public class SpotifyService {
 //
 //
 //        for(User u1 : spotifyRepository.creatorPlaylistMap.keySet() ){
-//            for(Song s : spotifyRepository.creatorPlaylistMap.get(u1)){
+//            for(Song s1 : spotifyRepository.creatorPlaylistMap.get(u1)){
 //
 //            }
 //        }
@@ -214,7 +214,7 @@ public class SpotifyService {
         for(Song s : spotifyRepository.songs){
             if(s.getTitle().equals(songTitle)) return s ;
         }
-        throw new SongNotExistException() ;
+        throw new SongDoesNotExistException() ;
     }
 
 
