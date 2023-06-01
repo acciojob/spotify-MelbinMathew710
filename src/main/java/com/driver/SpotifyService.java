@@ -197,7 +197,7 @@ public class SpotifyService {
             User creator = null ;
             boolean flag = false ;
             for(User user : spotifyRepository.users){
-                if(user.getMobile().equals(mobile){
+                if(user.getMobile().equals(mobile)){
                     creator = user ;
                     flag = true ;
                     return user ;
