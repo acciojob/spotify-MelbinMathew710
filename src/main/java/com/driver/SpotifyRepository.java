@@ -56,7 +56,7 @@ public class SpotifyRepository {
         return artist ;
     }
 
-    public Album createAlbum(String title) {
+    public Album createAlbum(String title, String artistName) {
         Album album = new Album(title) ;
         albums.add(album) ;
 

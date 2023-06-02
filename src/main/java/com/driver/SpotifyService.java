@@ -32,7 +32,7 @@ public class SpotifyService {
         if(!spotifyRepository.artists.contains(artist)){
             spotifyRepository.artists.add(artist) ;
         }
-        Album album = spotifyRepository.createAlbum(title) ;
+        Album album = spotifyRepository.createAlbum(title, artistName) ;
 
         if(!spotifyRepository.artistAlbumMap.containsKey(artist)){
             spotifyRepository.artistAlbumMap.put(artist,new ArrayList<>()) ;
