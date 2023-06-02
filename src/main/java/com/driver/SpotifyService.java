@@ -166,9 +166,9 @@ public class SpotifyService {
 
         if(!spotifyRepository.songLikeMap.get(s).contains(u)){
             spotifyRepository.songLikeMap.get(s).add(u) ;
+            s.setLikes(s.getLikes()+1);
         }
 
-        s.setLikes(s.getLikes()+1);
         Album albumfound = null ;
         for(Album a : spotifyRepository.albumSongMap.keySet()){
             if(spotifyRepository.albumSongMap.get(a).contains(s)){
