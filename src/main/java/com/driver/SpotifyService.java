@@ -187,6 +187,7 @@ public class SpotifyService {
             }
         }
 
+        if(artistfound== null) throw new ArtistNotFoundException() ;
         artistfound.setLikes(artistfound.getLikes()+1);
 
         return s ;
